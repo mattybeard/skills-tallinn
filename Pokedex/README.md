@@ -1,75 +1,55 @@
-# React + TypeScript + Vite
+# Pokédex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive Pokédex built with React, TypeScript and Vite. It uses data from the public [PokéAPI](https://pokeapi.co/).
 
-Currently, two official plugins are available:
+Built from this prompt:
+```
+Build a modern, responsive Pokédex application using React and TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Use the public PokéAPI to display Pokémon in a card grid, with their artwork, names, numbers and types.
 
-## React Compiler
+Users should be able to browse pages of 12 Pokémon, search by name or Pokédex number, open a Pokémon to view its stats and abilities, and toggle between normal and shiny artwork.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+Include appropriate loading and error states. The application should run locally using Vite.
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Card grid that shows official artwork, name, National Pokédex number and types, 12 Pokémon per page.
+- Search by name (partial matches, such as `saur`) or by Pokédex number (`25` or `#25`).
+- Detail dialog with height, weight, abilities (including hidden abilities) and base stats.
+- Shiny toggle that switches the artwork in the grid and in the detail dialog.
+- Skeleton loading states, empty search results, and error messages with a retry button.
+- The search query and page number are saved in the URL, so a refresh keeps your place.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Run locally
 
+Requires Node.js 20.19 or later.
+
+```sh
+npm install
+npm run dev
 ```
+
+Then open http://localhost:5173.
+
+## Scripts
+
+| Command           | Description                             |
+| ----------------- | --------------------------------------- |
+| `npm run dev`     | Start the Vite dev server.              |
+| `npm run build`   | Type-check and build to `dist/`.        |
+| `npm run preview` | Serve the production build locally.     |
+| `npm run lint`    | Run ESLint.                             |
+
+## How it works
+
+On startup, the app loads the full species list from `/pokemon-species` once. Species IDs are National Pokédex numbers. Search and pagination filter this list locally. The app then requests `/pokemon/{id}` only for the 12 Pokémon on the current page and caches each response in memory.
+
+| File                                   | Purpose                                         |
+| -------------------------------------- | ----------------------------------------------- |
+| `src/api.ts`                           | PokéAPI requests, response mapping and caching. |
+| `src/App.tsx`                          | Search, pagination, loading and error states.   |
+| `src/components/PokemonCard.tsx`       | Grid card and loading skeleton.                 |
+| `src/components/PokemonDetail.tsx`     | Detail dialog with stats and abilities.         |
+| `src/components/Artwork.tsx`           | Normal or shiny artwork with load fallback.     |
