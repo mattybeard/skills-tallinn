@@ -2,7 +2,7 @@
 
 A responsive Pokédex built with React, TypeScript and Vite. It uses data from the public [PokéAPI](https://pokeapi.co/).
 
-Built from this prompt:
+Built from this prompt using Claude Opus 5.5:
 ```
 Build a modern, responsive Pokédex application using React and TypeScript.
 
