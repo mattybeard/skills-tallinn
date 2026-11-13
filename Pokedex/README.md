@@ -22,6 +22,24 @@ Include appropriate loading and error states. The application should run locally
 - Skeleton loading states, empty search results, and error messages with a retry button.
 - The search query and page number are saved in the URL, so a refresh keeps your place.
 
+## Screenshots
+
+Each page shows 12 Pokémon with their artwork, Pokédex number, name and types.
+
+![Pokédex grid showing the first 12 Pokémon](./docs/screenshots/grid.png)
+
+Search matches partial names, and the Shiny toggle switches all artwork to the shiny variants.
+
+![Search results for "char" with shiny artwork turned on](./docs/screenshots/search-shiny.png)
+
+Selecting a Pokémon opens a dialog with its abilities and base stats. The dialog has its own artwork toggle.
+
+![Detail dialog for shiny Charizard showing abilities and base stats](./docs/screenshots/detail.png)
+
+On narrow screens, the grid uses two columns and the search box and Shiny toggle move below the title. This screenshot uses dark mode.
+
+<img src="./docs/screenshots/mobile-dark.png" alt="Pokédex in dark mode on a narrow mobile screen" width="320">
+
 ## Run locally
 
 Requires Node.js 20.19 or later.
