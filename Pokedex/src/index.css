@@ -1,64 +1,76 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --text: #1d1e26;
+  --text-muted: #5f6372;
+  --border: #e1e3ea;
+  --accent: #e3350d;
+  --accent-contrast: #ffffff;
+  --focus: #2563eb;
+  --skeleton: #e6e8ef;
+  --skeleton-highlight: #f3f4f8;
+  --shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 6%);
+  --shadow-hover: 0 2px 4px rgb(0 0 0 / 8%), 0 10px 24px rgb(0 0 0 / 12%);
+  --radius: 16px;
+  --content-width: 1200px;
+  --gutter: 20px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --type-normal: #a8a77a;
+  --type-fire: #ee8130;
+  --type-water: #6390f0;
+  --type-electric: #e5bc1f;
+  --type-grass: #7ac74c;
+  --type-ice: #66c7c3;
+  --type-fighting: #c22e28;
+  --type-poison: #a33ea1;
+  --type-ground: #d4a83f;
+  --type-flying: #a98ff3;
+  --type-psychic: #f95587;
+  --type-bug: #a6b91a;
+  --type-rock: #b6a136;
+  --type-ghost: #735797;
+  --type-dragon: #6f35fc;
+  --type-dark: #705746;
+  --type-steel: #9a9ab8;
+  --type-fairy: #d685ad;
+  --type-unknown: #68a090;
+  --type-color: var(--border);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
   color-scheme: light dark;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
   color: var(--text);
   background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+    --bg: #12131a;
+    --surface: #1b1d26;
+    --surface-raised: #232633;
+    --text: #eef0f6;
+    --text-muted: #a3a8b8;
+    --border: #2d303d;
+    --accent: #ff5a36;
+    --focus: #60a5fa;
+    --skeleton: #262936;
+    --skeleton-highlight: #30344384;
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+    --shadow-hover: 0 8px 24px rgb(0 0 0 / 50%);
   }
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+@media (max-width: 600px) {
+  :root {
+    --gutter: 14px;
+  }
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -66,46 +78,104 @@ body {
   margin: 0;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+button {
+  font: inherit;
+  color: inherit;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
+[data-type] {
+  --type-color: var(--type-unknown);
+}
+[data-type='normal'] { --type-color: var(--type-normal); }
+[data-type='fire'] { --type-color: var(--type-fire); }
+[data-type='water'] { --type-color: var(--type-water); }
+[data-type='electric'] { --type-color: var(--type-electric); }
+[data-type='grass'] { --type-color: var(--type-grass); }
+[data-type='ice'] { --type-color: var(--type-ice); }
+[data-type='fighting'] { --type-color: var(--type-fighting); }
+[data-type='poison'] { --type-color: var(--type-poison); }
+[data-type='ground'] { --type-color: var(--type-ground); }
+[data-type='flying'] { --type-color: var(--type-flying); }
+[data-type='psychic'] { --type-color: var(--type-psychic); }
+[data-type='bug'] { --type-color: var(--type-bug); }
+[data-type='rock'] { --type-color: var(--type-rock); }
+[data-type='ghost'] { --type-color: var(--type-ghost); }
+[data-type='dragon'] { --type-color: var(--type-dragon); }
+[data-type='dark'] { --type-color: var(--type-dark); }
+[data-type='steel'] { --type-color: var(--type-steel); }
+[data-type='fairy'] { --type-color: var(--type-fairy); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.button {
   display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.button:hover:not(:disabled) {
+  border-color: var(--text-muted);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.button-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.button-primary:hover:not(:disabled) {
+  border-color: var(--accent);
+  filter: brightness(1.08);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--skeleton) 25%, var(--skeleton-highlight) 50%, var(--skeleton) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
 }

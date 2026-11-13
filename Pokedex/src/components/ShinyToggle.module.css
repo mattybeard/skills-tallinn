@@ -1,0 +1,19 @@
+.toggle {
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+.toggle[aria-pressed='true'] {
+  background: linear-gradient(135deg, #fde68a, #f9a8d4 55%, #a5b4fc);
+  border-color: transparent;
+  color: #1d1e26;
+}
+
+.toggle[aria-pressed='true'] .icon {
+  color: #b45309;
+}
